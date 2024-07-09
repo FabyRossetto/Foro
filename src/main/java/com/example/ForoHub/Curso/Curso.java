@@ -34,4 +34,12 @@ public class Curso {
     }
     
     //actualizar datos
-}
+
+    public Curso actualizarCurso(DtoCurso curso) {
+        this.nombreCurso= curso.nombreCurso();
+        this.nombreProfesor=curso.nombreProfesor();
+        return this;
+    }
+    
+    }
+

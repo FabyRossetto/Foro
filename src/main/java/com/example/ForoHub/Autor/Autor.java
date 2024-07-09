@@ -30,4 +30,10 @@ public class Autor {
     }
     
     //actualizar datos
+    
+    public Autor actualizarAutor(DtoAutor autor) {
+        this.nombre= autor.nombre();
+        this.apellido=autor.apellido();
+        return this;
+    }
 }

@@ -66,6 +66,26 @@ public class Topico {
     }
     
     //actualizar datos topico
+    public void actualizarDatos(DatosActualizarTopico datosActualizarTopico) {
+        if (datosActualizarTopico.titulo() != null) {
+            this.titulo = datosActualizarTopico.titulo();
+        }
+        if (datosActualizarTopico.mensaje() != null) {
+            this.mensaje = datosActualizarTopico.mensaje();
+        }
+        if (datosActualizarTopico.estado() != null) {
+            this.estado = Estado.valueOf(datosActualizarTopico.estado());
+        }
+        if (datosActualizarTopico.autor() != null) {
+            // Actualizar autor si es proporcionado
+            
+            this.autor = autor.actualizarAutor(datosActualizarTopico.autor());
+        }
+        if (datosActualizarTopico.curso() != null) {
+            // Actualizar curso si es proporcionado
+            this.curso = curso.actualizarCurso(datosActualizarTopico.curso());
     
-    
+        }
+        
+}
 }
