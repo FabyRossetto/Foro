@@ -12,6 +12,7 @@ import com.example.ForoHub.Topico.DatosRegistroTopico;
 import com.example.ForoHub.Topico.DatosRespuestaTopico;
 import com.example.ForoHub.Topico.TopicRepository;
 import com.example.ForoHub.Topico.Topico;
+import com.example.infra.TratadorDeErrores.ValidacionDeIntegridad;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import java.net.URI;
@@ -75,7 +76,7 @@ public class TopicController {
     @GetMapping("/{id}")
     //"Obtiene los registros de los topicos con el ID")
     public ResponseEntity<DatosListadoTopicos> retornaDatosTopico(@PathVariable Long id) throws Exception {
-        Topico topico = tr.findById(id).orElseThrow(() -> new Exception("Tópico no encontrado"));
+        Topico topico = tr.findById(id).orElseThrow(() -> new ValidacionDeIntegridad("Tópico no encontrado"));
         //titulo,mensaje,fechaDeCreacion, estado,autor,curso. Porque necesito estos datos es que uso el record DatosListadoTopicos.
         DatosListadoTopicos datosTopico = new DatosListadoTopicos(topico);
         return ResponseEntity.ok(datosTopico);
@@ -87,7 +88,7 @@ public class TopicController {
     public ResponseEntity<Topico> actualizarTopico(@PathVariable Long id, @RequestBody @Valid DatosActualizarTopico datosActualizarTopico) throws Exception {
         Optional<Topico> optionalTopico = tr.findById(id);
         if (optionalTopico.isEmpty()) {
-            throw new Exception("Tópico no encontrado");
+            throw new ValidacionDeIntegridad("Tópico no encontrado");
         }
 
         Topico topico = optionalTopico.get();
@@ -106,7 +107,7 @@ public class TopicController {
         if(optionalTopico.isPresent()){
         tr.deleteById(id);
         }else{
-            throw new Exception("Tópico no encontrado");
+            throw new ValidacionDeIntegridad("Tópico no encontrado");
         }
         return ResponseEntity.noContent().build();
     }
