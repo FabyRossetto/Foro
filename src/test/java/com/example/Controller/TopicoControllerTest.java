@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.example.ForoHub;
+package com.example.Controller;
 
 import com.example.ForoHub.Autor.DtoAutor;
 import com.example.ForoHub.Curso.DtoCurso;
+import com.example.ForoHub.ForoHubApplication;
 import com.example.ForoHub.Topico.DatosActualizarTopico;
 import com.example.ForoHub.Topico.DatosRegistroTopico;
 import com.example.ForoHub.Topico.Estado;
@@ -30,14 +31,16 @@ import org.springframework.security.test.context.support.WithMockUser;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.util.ReflectionTestUtils;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-@SpringBootTest
+@SpringBootTest(classes = ForoHubApplication.class)
 @AutoConfigureMockMvc
 @AutoConfigureJsonTesters
 @ActiveProfiles("test")
 @SuppressWarnings("all")
+@TestPropertySource(locations = "classpath:application_test.properties")
 public class TopicoControllerTest {
 
     @Autowired

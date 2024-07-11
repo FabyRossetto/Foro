@@ -77,6 +77,7 @@ public class TopicController {
     //"Obtiene los registros de los topicos con el ID")
     public ResponseEntity<DatosListadoTopicos> retornaDatosTopico(@PathVariable Long id) throws Exception {
         Topico topico = tr.findById(id).orElseThrow(() -> new ValidacionDeIntegridad("Tópico no encontrado"));
+       
         //titulo,mensaje,fechaDeCreacion, estado,autor,curso. Porque necesito estos datos es que uso el record DatosListadoTopicos.
         DatosListadoTopicos datosTopico = new DatosListadoTopicos(topico);
         return ResponseEntity.ok(datosTopico);

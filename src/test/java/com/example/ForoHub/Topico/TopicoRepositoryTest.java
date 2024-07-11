@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.example.ForoHub;
+package com.example.ForoHub.Topico;
 
 import com.example.ForoHub.Autor.DtoAutor;
 import com.example.ForoHub.Curso.DtoCurso;
@@ -10,6 +10,7 @@ import com.example.ForoHub.Topico.DatosRegistroTopico;
 import com.example.ForoHub.Topico.Estado;
 import com.example.ForoHub.Topico.TopicRepository;
 import com.example.ForoHub.Topico.Topico;
+import jakarta.transaction.Transactional;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ import org.springframework.test.context.ActiveProfiles;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("test")
 public class TopicoRepositoryTest {
-
+ 
     @Autowired
     private TopicRepository topicoRepository;
     @Autowired
@@ -60,6 +61,7 @@ public class TopicoRepositoryTest {
         assertThat(topicoEncontrado.get()).isEqualTo(topico);
     }
 
+    @Transactional
     private Topico registrarTopico(String titulo, Estado estado, String mensaje, DtoAutor autor, DtoCurso curso) {
         DatosRegistroTopico datosRegistroTopico = new DatosRegistroTopico(titulo, estado, mensaje, autor, curso);
         Topico topico = new Topico(datosRegistroTopico);
